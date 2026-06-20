@@ -1,0 +1,154 @@
+/* ============================================================================
+   ANTARDRISHTI MIND - CUSTOM CSS STYLESHEET
+   ============================================================================ */
+
+/* Dyslexia-friendly font settings */
+.dyslexia-font {
+  font-family: 'OpenDyslexic', 'Comic Sans MS', sans-serif !important;
+  letter-spacing: 0.12em !important;
+  word-spacing: 0.18em !important;
+  line-height: 1.6 !important;
+}
+
+.dyslexia-font button,
+.dyslexia-font a,
+.dyslexia-font input,
+.dyslexia-font textarea {
+  border-bottom: 2.5px solid currentColor !important;
+}
+
+/* Calm Mode layout modifiers */
+.calm-mode {
+  --tw-bg-opacity: 1 !important;
+  background-color: #FAF8F5 !important;
+  font-weight: 450 !important;
+}
+
+.calm-mode * {
+  transition: none !important;
+  animation: none !important;
+  box-shadow: none !important;
+  text-shadow: none !important;
+}
+
+/* Custom scrollbars */
+::-webkit-scrollbar {
+  width: 6px;
+  height: 6px;
+}
+
+::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+::-webkit-scrollbar-thumb {
+  background: rgba(47, 62, 70, 0.15);
+  border-radius: 9999px;
+}
+
+.dark ::-webkit-scrollbar-thumb {
+  background: rgba(227, 231, 228, 0.15);
+}
+
+/* Skip-to-content helper */
+.skip-link {
+  position: absolute;
+  top: -100px;
+  left: 0;
+  background: #FAF8F5;
+  color: #2F3E46;
+  padding: 8px 16px;
+  z-index: 100;
+  transition: top 0.2s;
+}
+
+.skip-link:focus {
+  top: 0;
+}
+
+/* Breathing animation for Pranayama visualizer */
+@keyframes breathingCycle {
+  0%, 100% {
+    transform: scale(1);
+    opacity: 0.55;
+    background-color: rgba(95, 125, 109, 0.2);
+  }
+  50% {
+    transform: scale(1.35);
+    opacity: 1;
+    background-color: rgba(95, 125, 109, 0.45);
+  }
+}
+
+.breathing-indicator {
+  animation: breathingCycle 6s ease-in-out infinite;
+}
+
+/* Listening pulsing effect for voice input */
+@keyframes voicePulse {
+  0% {
+    box-shadow: 0 0 0 0 rgba(198, 138, 76, 0.5);
+  }
+  70% {
+    box-shadow: 0 0 0 10px rgba(198, 138, 76, 0);
+  }
+  100% {
+    box-shadow: 0 0 0 0 rgba(198, 138, 76, 0);
+  }
+}
+
+.voice-listening-active {
+  animation: voicePulse 1.5s infinite;
+}
+
+/* Layout transition tweaks */
+.nav-btn, .mobile-nav-btn {
+  position: relative;
+  overflow: hidden;
+}
+
+/* Accessibility Focus States */
+a:focus-visible,
+button:focus-visible,
+input:focus-visible,
+textarea:focus-visible,
+select:focus-visible {
+  outline: 3px solid #6F5E7C;
+  outline-offset: 2.5px;
+}
+
+/* Page Transition Animations */
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(6px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes slideInRight {
+  from {
+    transform: translateX(100%);
+  }
+  to {
+    transform: translateX(0);
+  }
+}
+
+.animate-in {
+  animation-duration: 0.35s;
+  animation-timing-function: cubic-bezier(0.16, 1, 0.3, 1);
+  animation-fill-mode: both;
+}
+
+.fade-in {
+  animation-name: fadeIn;
+}
+
+.slide-in-from-right {
+  animation-name: slideInRight;
+}
+

@@ -1,0 +1,1156 @@
+<!DOCTYPE html>
+<html lang="en" class="h-full">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Antardrishti Mind — Beyond Marks. Beyond Stress. Towards Growth.</title>
+  
+  <!-- Tailwind CSS CDN, Dexie, Chart.js, Lucide Icons -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script src="https://unpkg.com/dexie@latest/dist/dexie.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+  <script src="https://unpkg.com/lucide@latest"></script>
+  
+  <!-- Outfit Google Font -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  
+  <!-- Modular Stylesheet -->
+  <link rel="stylesheet" href="css/styles.css">
+
+  <script>
+    // Custom tailwind configuration matching our psychology-approved pastel palette
+    tailwind.config = {
+      darkMode: 'class',
+      theme: {
+        extend: {
+          fontFamily: {
+            sans: ['Outfit', 'Inter', 'sans-serif'],
+          },
+          colors: {
+            brand: {
+              cream: '#FAF8F5',
+              'sage-light': '#E8EFE9',
+              sage: '#5F7D6D',
+              'lavender-light': '#EAE6F3',
+              lavender: '#6F5E7C',
+              'gold-light': '#F6EBD0',
+              gold: '#A37E3E',
+              'amber-light': '#F9EEDD',
+              amber: '#C68A4C',
+              slate: '#2F3E46',
+              'dark-bg': '#121413',
+              'dark-card': '#1A1E1C',
+              'dark-text': '#E3E7E4'
+            }
+          }
+        }
+      }
+    }
+  </script>
+</head>
+<body class="h-full bg-brand-cream text-brand-slate font-sans selection:bg-brand-sage-light selection:text-brand-sage">
+
+  <!-- Skip Link -->
+  <a href="#main-content" class="skip-link">Skip to main content</a>
+
+  <div class="min-h-screen flex flex-col md:flex-row relative">
+    
+    <!-- DESKTOP SIDEBAR -->
+    <aside class="hidden md:flex flex-col w-64 border-r border-brand-sage/20 bg-white p-6 shrink-0 justify-between">
+      <div class="space-y-8">
+        <!-- Logo -->
+        <div class="py-2 border-b border-brand-sage/10">
+          <h1 class="text-xl font-bold tracking-tight text-brand-sage flex items-center gap-2">
+            🌸 <span data-t="title">Antardrishti Mind</span>
+          </h1>
+          <p class="text-[9px] text-brand-slate/60 mt-1 uppercase tracking-wider font-semibold" data-t="tagline">
+            Beyond Marks. Beyond Stress. Towards Growth.
+          </p>
+        </div>
+
+        <!-- Navigation items -->
+        <nav aria-label="Desktop Primary Navigation" class="space-y-2 flex flex-col">
+          <button onclick="switchTab('home')" id="nav-btn-home" class="nav-btn flex items-center gap-4 w-full px-4 py-3 rounded-xl text-sm font-semibold transition-all text-brand-sage bg-brand-sage-light/50">
+            <i data-lucide="home" class="w-5 h-5 shrink-0"></i>
+            <span data-t="navHome">Home</span>
+          </button>
+          <button onclick="switchTab('mind')" id="nav-btn-mind" class="nav-btn flex items-center gap-4 w-full px-4 py-3 rounded-xl text-sm font-semibold transition-all text-brand-slate hover:bg-brand-sage-light/20">
+            <i data-lucide="heart" class="w-5 h-5 shrink-0"></i>
+            <span data-t="navMind">Mind Space</span>
+          </button>
+          <button onclick="switchTab('body')" id="nav-btn-body" class="nav-btn flex items-center gap-4 w-full px-4 py-3 rounded-xl text-sm font-semibold transition-all text-brand-slate hover:bg-brand-sage-light/20">
+            <i data-lucide="activity" class="w-5 h-5 shrink-0"></i>
+            <span data-t="navBody">Body & Brain</span>
+          </button>
+          <button onclick="switchTab('exam')" id="nav-btn-exam" class="nav-btn flex items-center gap-4 w-full px-4 py-3 rounded-xl text-sm font-semibold transition-all text-brand-slate hover:bg-brand-sage-light/20">
+            <i data-lucide="book-open" class="w-5 h-5 shrink-0"></i>
+            <span data-t="navExam">Exam Path</span>
+          </button>
+          <button onclick="switchTab('beyond')" id="nav-btn-beyond" class="nav-btn flex items-center gap-4 w-full px-4 py-3 rounded-xl text-sm font-semibold transition-all text-brand-slate hover:bg-brand-sage-light/20">
+            <i data-lucide="tree-deciduous" class="w-5 h-5 shrink-0"></i>
+            <span data-t="navBeyond">Beyond Marks</span>
+          </button>
+          <button onclick="switchTab('family')" id="nav-btn-family" class="nav-btn flex items-center gap-4 w-full px-4 py-3 rounded-xl text-sm font-semibold transition-all text-brand-slate hover:bg-brand-sage-light/20">
+            <i data-lucide="users" class="w-5 h-5 shrink-0"></i>
+            <span data-t="navFamily">Family Bridge</span>
+          </button>
+        </nav>
+      </div>
+
+      <!-- Settings bottom -->
+      <div class="pt-6 border-t border-brand-sage/15">
+        <button onclick="switchTab('settings')" id="nav-btn-settings" class="nav-btn flex items-center gap-4 w-full px-4 py-3 rounded-xl text-sm font-semibold transition-all text-brand-slate hover:bg-brand-sage-light/20">
+          <i data-lucide="settings" class="w-5 h-5 shrink-0"></i>
+          <span data-t="navSettings">Settings</span>
+        </button>
+      </div>
+    </aside>
+
+    <!-- MOBILE NAVIGATION BOTTOM TAB BAR -->
+    <nav aria-label="Mobile Navigation" class="md:hidden fixed bottom-0 inset-x-0 bg-white border-t border-brand-sage/20 py-2 px-3 z-30 flex justify-around shadow-lg">
+      <button onclick="switchTab('home')" class="mobile-nav-btn flex flex-col items-center gap-1 text-brand-sage" id="m-nav-home">
+        <i data-lucide="home" class="w-5 h-5"></i>
+        <span class="text-[9px] tracking-tight" data-t="navHome">Home</span>
+      </button>
+      <button onclick="switchTab('mind')" class="mobile-nav-btn flex flex-col items-center gap-1 text-brand-slate/70" id="m-nav-mind">
+        <i data-lucide="heart" class="w-5 h-5"></i>
+        <span class="text-[9px] tracking-tight" data-t="navMind">Mind Space</span>
+      </button>
+      <button onclick="switchTab('body')" class="mobile-nav-btn flex flex-col items-center gap-1 text-brand-slate/70" id="m-nav-body">
+        <i data-lucide="activity" class="w-5 h-5"></i>
+        <span class="text-[9px] tracking-tight" data-t="navBody">Body/Brain</span>
+      </button>
+      <button onclick="switchTab('exam')" class="mobile-nav-btn flex flex-col items-center gap-1 text-brand-slate/70" id="m-nav-exam">
+        <i data-lucide="book-open" class="w-5 h-5"></i>
+        <span class="text-[9px] tracking-tight" data-t="navExam">Exam Path</span>
+      </button>
+      <button onclick="switchTab('beyond')" class="mobile-nav-btn flex flex-col items-center gap-1 text-brand-slate/70" id="m-nav-beyond">
+        <i data-lucide="tree-deciduous" class="w-5 h-5"></i>
+        <span class="text-[9px] tracking-tight" data-t="navBeyond">Beyond</span>
+      </button>
+      <button onclick="switchTab('settings')" class="mobile-nav-btn flex flex-col items-center gap-1 text-brand-slate/70" id="m-nav-settings">
+        <i data-lucide="settings" class="w-5 h-5"></i>
+        <span class="text-[9px] tracking-tight" data-t="navSettings">Settings</span>
+      </button>
+    </nav>
+
+    <!-- MAIN PAGE CONTAINER -->
+    <main id="main-content" class="flex-1 p-4 md:p-8 overflow-y-auto pb-24 md:pb-8">
+      
+      <!-- 1. HOME DASHBOARD -->
+      <section id="page-home" class="page-view max-w-4xl mx-auto space-y-8 animate-in fade-in duration-200">
+        <div class="flex justify-between items-center flex-wrap gap-4 border-b border-brand-sage/15 pb-6">
+          <div>
+            <h2 class="text-3xl font-bold font-sans text-brand-slate">
+              <span data-t="welcome">Welcome back</span>, <span id="home-profile-name">Aspirant</span> <span id="home-profile-avatar">🌸</span>
+            </h2>
+            <p class="text-sm text-brand-slate/75 mt-1">How are you balancing your mental and academic engine today?</p>
+          </div>
+          <span class="px-3.5 py-1.5 bg-brand-sage-light text-brand-sage border border-brand-sage/20 rounded-full text-xs font-semibold" id="home-exam-target">
+            Exam Target: JEE
+          </span>
+        </div>
+
+        <!-- 3 Metrics cards -->
+        <div class="grid gap-6 sm:grid-cols-3">
+          <div onclick="switchTab('body')" class="p-6 bg-white border border-brand-sage/15 rounded-2xl shadow-sm hover:border-brand-sage/40 transition-all cursor-pointer group flex flex-col justify-between">
+            <div>
+              <div class="flex justify-between items-start">
+                <span class="text-xs font-bold uppercase tracking-wider text-brand-slate/60" data-t="brainFuelScore">Brain Fuel Score</span>
+                <i data-lucide="activity" class="w-5 h-5 text-brand-sage group-hover:scale-110 transition-transform"></i>
+              </div>
+              <div class="text-3xl font-bold text-brand-slate mt-2 font-mono" id="fuel-card-val">70%</div>
+            </div>
+            <div class="flex items-center justify-between text-[11px] text-brand-sage font-semibold pt-4 border-t border-brand-sage/10 mt-4">
+              <span>Log daily habits to increase</span>
+              <i data-lucide="arrow-up-right" class="w-3.5 h-3.5"></i>
+            </div>
+          </div>
+
+          <div onclick="switchTab('beyond')" class="p-6 bg-white border border-brand-sage/15 rounded-2xl shadow-sm hover:border-brand-sage/40 transition-all cursor-pointer group flex flex-col justify-between">
+            <div>
+              <div class="flex justify-between items-start">
+                <span class="text-xs font-bold uppercase tracking-wider text-brand-slate/60" data-t="resilienceScore">Resilience Score</span>
+                <i data-lucide="shield-check" class="w-5 h-5 text-brand-sage group-hover:scale-110 transition-transform"></i>
+              </div>
+              <div class="text-3xl font-bold text-brand-slate mt-2 font-mono" id="resilience-card-val">65%</div>
+            </div>
+            <div class="flex items-center justify-between text-[11px] text-brand-sage font-semibold pt-4 border-t border-brand-sage/10 mt-4">
+              <span>Grow your resilience tree</span>
+              <i data-lucide="arrow-up-right" class="w-3.5 h-3.5"></i>
+            </div>
+          </div>
+
+          <div onclick="switchTab('mind')" class="p-6 bg-white border border-brand-sage/15 rounded-2xl shadow-sm hover:border-brand-sage/40 transition-all cursor-pointer group flex flex-col justify-between">
+            <div>
+              <div class="flex justify-between items-start">
+                <span class="text-xs font-bold uppercase tracking-wider text-brand-slate/60" data-t="wellnessScore">Mind Balance</span>
+                <i data-lucide="heart" class="w-5 h-5 text-brand-sage group-hover:scale-110 transition-transform"></i>
+              </div>
+              <div class="text-3xl font-bold text-brand-slate mt-2 font-mono" id="mind-card-val">65%</div>
+            </div>
+            <div class="flex items-center justify-between text-[11px] text-brand-sage font-semibold pt-4 border-t border-brand-sage/10 mt-4">
+              <span>Reflect in your journal</span>
+              <i data-lucide="arrow-up-right" class="w-3.5 h-3.5"></i>
+            </div>
+          </div>
+        </div>
+
+        <!-- Mood stress trend area chart -->
+        <div class="p-6 bg-white border border-brand-sage/15 rounded-2xl shadow-sm space-y-6">
+          <h3 class="font-bold text-base text-brand-slate border-b border-brand-sage/10 pb-3" data-t="moodTrend">
+            Mood & Stress Analysis (Last 7 Days)
+          </h3>
+          <div class="h-64 relative w-full">
+            <canvas id="moodChart"></canvas>
+          </div>
+        </div>
+
+        <!-- Daily recommendations (Descriptive wellness coach recommendations) -->
+        <div class="p-6 bg-brand-sage-light/35 border border-brand-sage/20 rounded-2xl space-y-4">
+          <h3 class="font-bold text-lg text-brand-sage flex items-center gap-2">
+            <i data-lucide="sparkles" class="w-5 h-5"></i>
+            <span data-t="dailyCoach">Daily Wellness Guide</span>
+          </h3>
+          
+          <!-- Detailed wellness coach overview cards -->
+          <div class="grid gap-6 md:grid-cols-2" id="home-coach-recs">
+            <!-- Populated via Javascript -->
+          </div>
+        </div>
+      </section>
+
+      <!-- 2. MIND SPACE -->
+      <section id="page-mind" class="page-view hidden max-w-4xl mx-auto space-y-8 animate-in fade-in duration-200">
+        <div>
+          <h2 class="text-3xl font-bold font-sans text-brand-slate" data-t="journalTitle">AI Reflective Journal</h2>
+          <p class="text-sm text-brand-slate/70 mt-1">Express your preparation thoughts, fears, or physical burnout. Everything stays privately on your browser.</p>
+        </div>
+
+        <div class="grid gap-6 md:grid-cols-3">
+          <!-- Editor -->
+          <div class="md:col-span-2 bg-white p-6 border border-brand-sage/15 rounded-2xl shadow-sm space-y-4 flex flex-col justify-between">
+            <div class="space-y-4">
+              <div class="flex justify-between items-center">
+                <span class="text-xs font-bold uppercase tracking-wider text-brand-slate/75">New Reflection</span>
+                <button onclick="toggleSpeech()" id="journal-voice-btn" class="flex items-center gap-1.5 px-3 py-1 border border-brand-sage/20 text-brand-sage text-xs font-bold rounded-lg hover:bg-brand-sage/10 transition-colors">
+                  <i data-lucide="mic" class="w-3.5 h-3.5"></i>
+                  <span data-t="voiceStart">Start Voice Input</span>
+                </button>
+              </div>
+              <textarea id="journal-text-area" placeholder="How was your preparation today? How do you feel about the syllabus, your mock tests, or expectations? (Write or use voice input)" class="w-full h-44 p-4 bg-brand-cream border border-brand-sage/20 rounded-xl focus:outline-none focus:border-brand-sage text-brand-slate text-sm font-sans resize-none" aria-label="Reflection details"></textarea>
+            </div>
+
+            <div class="flex justify-between items-center pt-4 border-t border-brand-cream mt-2">
+              <button onclick="submitJournal()" id="journal-submit-btn" class="px-6 py-2.5 bg-brand-sage text-brand-cream font-bold rounded-xl hover:opacity-90 transition-opacity text-sm font-sans flex items-center gap-2">
+                <i data-lucide="book-open" class="w-4 h-4"></i>
+                <span data-t="analyzeJournal">Reflect & Analyze</span>
+              </button>
+              <button onclick="triggerSOS()" class="text-xs font-bold text-brand-amber hover:underline flex items-center gap-1">
+                <i data-lucide="shield-alert" class="w-3.5 h-3.5"></i>
+                <span>Need SOS Help?</span>
+              </button>
+            </div>
+          </div>
+
+          <!-- Coach advice & triggers -->
+          <div class="space-y-6">
+            <div class="p-6 bg-brand-lavender-light/40 border border-brand-lavender/25 rounded-2xl space-y-4">
+              <h3 class="font-bold text-base text-brand-lavender flex items-center gap-2">
+                <i data-lucide="sparkles" class="w-5 h-5"></i>
+                <span data-t="coachRecommendation">Wellness Coach Recommendations</span>
+              </h3>
+              <p id="mind-coach-text" class="text-sm text-brand-slate/90 leading-relaxed font-sans italic">
+                Write down today's reflection. I will generate personal, psychology-informed advice for you here.
+              </p>
+            </div>
+
+            <div class="p-6 bg-brand-sage-light/35 border border-brand-sage/20 rounded-2xl space-y-4">
+              <h3 class="font-bold text-base text-brand-sage flex items-center gap-2">
+                <i data-lucide="brain" class="w-5 h-5"></i>
+                <span data-t="hiddenTriggers">Hidden Trigger Detection</span>
+              </h3>
+              <div id="mind-triggers-box" class="flex gap-2 flex-wrap text-xs text-brand-slate/60 font-sans">
+                <!-- Triggers list populated dynamically -->
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Latest Analysis Details -->
+        <div id="mind-analysis-panel" class="hidden p-6 bg-white border border-brand-sage/15 rounded-2xl shadow-sm space-y-6">
+          <div class="flex justify-between items-center border-b border-brand-sage/10 pb-4">
+            <div>
+              <span class="text-xs font-bold uppercase tracking-wider text-brand-slate/60">Latest Emotional State</span>
+              <h3 class="text-xl font-bold text-brand-slate flex items-center gap-2 mt-0.5">
+                <i data-lucide="smile" class="w-5 h-5 text-brand-sage"></i>
+                <span id="mind-analysis-sentiment">Balanced</span>
+              </h3>
+            </div>
+          </div>
+
+          <div class="grid gap-6 sm:grid-cols-2 md:grid-cols-5">
+            <!-- Stress gauge -->
+            <div class="space-y-2">
+              <div class="flex justify-between text-xs font-semibold text-brand-slate/85">
+                <span data-t="stressLevel">Stress</span>
+                <span id="g-stress-val">30%</span>
+              </div>
+              <div class="w-full bg-brand-cream h-2.5 rounded-full overflow-hidden border border-black/5">
+                <div id="g-stress-bar" class="bg-brand-amber h-full rounded-full transition-all duration-500" style="width: 30%"></div>
+              </div>
+            </div>
+
+            <!-- Anxiety gauge -->
+            <div class="space-y-2">
+              <div class="flex justify-between text-xs font-semibold text-brand-slate/85">
+                <span data-t="anxietyLevel">Anxiety</span>
+                <span id="g-anxiety-val">25%</span>
+              </div>
+              <div class="w-full bg-brand-cream h-2.5 rounded-full overflow-hidden border border-black/5">
+                <div id="g-anxiety-bar" class="bg-brand-amber h-full rounded-full transition-all duration-500" style="width: 25%"></div>
+              </div>
+            </div>
+
+            <!-- Burnout gauge -->
+            <div class="space-y-2">
+              <div class="flex justify-between text-xs font-semibold text-brand-slate/85">
+                <span data-t="burnoutLevel">Burnout</span>
+                <span id="g-burnout-val">20%</span>
+              </div>
+              <div class="w-full bg-brand-cream h-2.5 rounded-full overflow-hidden border border-black/5">
+                <div id="g-burnout-bar" class="bg-brand-amber h-full rounded-full transition-all duration-500" style="width: 20%"></div>
+              </div>
+            </div>
+
+            <!-- Confidence gauge -->
+            <div class="space-y-2">
+              <div class="flex justify-between text-xs font-semibold text-brand-slate/85">
+                <span data-t="confidenceLevel">Confidence</span>
+                <span id="g-confidence-val">65%</span>
+              </div>
+              <div class="w-full bg-brand-cream h-2.5 rounded-full overflow-hidden border border-black/5">
+                <div id="g-confidence-bar" class="bg-brand-sage h-full rounded-full transition-all duration-500" style="width: 65%"></div>
+              </div>
+            </div>
+
+            <!-- Motivation gauge -->
+            <div class="space-y-2">
+              <div class="flex justify-between text-xs font-semibold text-brand-slate/85">
+                <span data-t="motivationLevel">Motivation</span>
+                <span id="g-motivation-val">75%</span>
+              </div>
+              <div class="w-full bg-brand-cream h-2.5 rounded-full overflow-hidden border border-black/5">
+                <div id="g-motivation-bar" class="bg-brand-sage h-full rounded-full transition-all duration-500" style="width: 75%"></div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Reflections history list -->
+        <div class="space-y-4">
+          <h3 class="font-bold text-lg text-brand-slate">Past Reflections</h3>
+          <div id="past-reflections-list" class="space-y-3">
+            <!-- Rendered dynamically -->
+          </div>
+        </div>
+      </section>
+
+      <!-- 3. BODY & BRAIN -->
+      <section id="page-body" class="page-view hidden max-w-4xl mx-auto space-y-8 animate-in fade-in duration-200">
+        <div>
+          <h2 class="text-3xl font-bold font-sans text-brand-slate" data-t="brainFuelTitle">Body & Brain Fuel</h2>
+          <p class="text-sm text-brand-slate/70 mt-1">Optimize your physical engine. A healthy body creates a calm, focused exam mind.</p>
+        </div>
+
+        <div class="grid gap-6 md:grid-cols-2">
+          <!-- Daily habit score & slider inputs -->
+          <div class="p-6 bg-white border border-brand-sage/15 rounded-2xl shadow-sm space-y-6">
+            <div class="flex justify-between items-center border-b border-brand-sage/10 pb-4">
+              <h3 class="font-bold text-lg text-brand-slate flex items-center gap-2">
+                <i data-lucide="activity" class="w-5 h-5 text-brand-sage"></i>
+                <span data-t="logMetrics">Log Daily Habits</span>
+              </h3>
+              <div class="flex items-center gap-1.5 px-3 py-1 bg-brand-sage/10 text-brand-sage text-xs font-bold rounded-lg border border-brand-sage/20">
+                <span>Fuel Score: <span id="body-fuel-val-top">70</span>/100</span>
+              </div>
+            </div>
+
+            <div class="space-y-5">
+              <!-- Sleep -->
+              <div class="space-y-2">
+                <div class="flex justify-between text-sm font-semibold">
+                  <span data-t="sleepLabel">Sleep (Hours)</span>
+                  <span class="text-brand-sage" id="slider-sleep-label">7.5 hrs</span>
+                </div>
+                <input id="slider-sleep" type="range" min="4" max="12" step="0.5" value="7.5" oninput="updateHabitSliders()" class="w-full accent-brand-sage cursor-pointer">
+              </div>
+
+              <!-- Water -->
+              <div class="space-y-2">
+                <div class="flex justify-between text-sm font-semibold">
+                  <span data-t="waterLabel">Hydration (ml)</span>
+                  <span class="text-brand-sage" id="slider-water-label">1500 ml</span>
+                </div>
+                <input id="slider-water" type="range" min="500" max="4000" step="250" value="1500" oninput="updateHabitSliders()" class="w-full accent-brand-sage cursor-pointer">
+              </div>
+
+              <!-- Activity -->
+              <div class="space-y-2">
+                <div class="flex justify-between text-sm font-semibold">
+                  <span data-t="activityLabel">Physical Activity (Minutes)</span>
+                  <span class="text-brand-sage" id="slider-activity-label">20 mins</span>
+                </div>
+                <input id="slider-activity" type="range" min="0" max="120" step="5" value="20" oninput="updateHabitSliders()" class="w-full accent-brand-sage cursor-pointer">
+              </div>
+
+              <!-- Diet -->
+              <div class="space-y-2">
+                <div class="flex justify-between text-sm font-semibold">
+                  <span data-t="nutritionLabel">Nutrition Quality</span>
+                  <span class="text-brand-sage" id="slider-nutrition-label">7/10</span>
+                </div>
+                <input id="slider-nutrition" type="range" min="1" max="10" step="1" value="7" oninput="updateHabitSliders()" class="w-full accent-brand-sage cursor-pointer">
+              </div>
+
+              <button onclick="saveHabitLogs()" class="w-full py-2.5 bg-brand-sage text-brand-cream font-bold rounded-xl hover:opacity-90 transition-opacity text-sm font-sans" data-t="saveMetrics">
+                Log Habits
+              </button>
+            </div>
+          </div>
+
+          <!-- Nutrition Focus Advice -->
+          <div class="p-6 bg-brand-sage-light/35 border border-brand-sage/20 rounded-2xl space-y-6">
+            <h3 class="font-bold text-lg text-brand-sage flex items-center gap-2">
+              <i data-lucide="sparkles" class="w-5 h-5"></i>
+              <span data-t="nutritionIntel">Focus & Mood Nutrition Suggestions</span>
+            </h3>
+            <div class="space-y-4 text-xs font-sans">
+              <div class="p-4 bg-white rounded-xl border border-brand-sage/10 shadow-sm">
+                <span class="font-bold text-brand-sage uppercase tracking-wider">State: Anxious / Restless</span>
+                <h4 class="font-bold text-sm text-brand-slate mt-1">Magnesium-rich almonds, Walnuts, and hot Chamomile tea</h4>
+                <p class="text-brand-slate/75 mt-0.5">Calms active neural excitability and lowers physiological cortisol markers.</p>
+              </div>
+              <div class="p-4 bg-white rounded-xl border border-brand-sage/10 shadow-sm">
+                <span class="font-bold text-brand-sage uppercase tracking-wider">State: Brain Fog / Pre-Exam</span>
+                <h4 class="font-bold text-sm text-brand-slate mt-1">Berries, Dark Chocolate (70%+), Green tea, roasted Chickpeas</h4>
+                <p class="text-brand-slate/75 mt-0.5">Boosts immediate cognitive focus and alerts vascular flow without crash cycles.</p>
+              </div>
+              <div class="p-4 bg-white rounded-xl border border-brand-sage/10 shadow-sm">
+                <span class="font-bold text-brand-sage uppercase tracking-wider">State: Fatigue / Exhaustion</span>
+                <h4 class="font-bold text-sm text-brand-slate mt-1">Coconut water, Banana, Oats, soaked Raisins</h4>
+                <p class="text-brand-slate/75 mt-0.5">Restores cellular electrolyte balance and muscle hydration smoothly.</p>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="grid gap-6 md:grid-cols-2">
+          <!-- Pranayama pacing guides -->
+          <div class="p-6 bg-white border border-brand-sage/15 rounded-2xl shadow-sm space-y-6">
+            <h3 class="font-bold text-lg text-brand-slate flex items-center gap-2">
+              <i data-lucide="wind" class="w-5 h-5 text-brand-sage"></i>
+              <span data-t="pranayamaTitle">Pranayama Breathing Guides</span>
+            </h3>
+
+            <!-- Interactive Pranayama Guide -->
+            <div id="pranayama-active-box" class="hidden flex flex-col items-center justify-center py-6 text-center space-y-5">
+              <div class="relative w-32 h-32 flex items-center justify-center rounded-full bg-brand-sage-light/40 border border-brand-sage/20">
+                <div id="breath-circle" class="absolute inset-4 bg-brand-sage rounded-full flex items-center justify-center text-brand-cream font-bold text-sm breathing-indicator">
+                  <span id="breath-sec-count">4s</span>
+                </div>
+              </div>
+              <div>
+                <h4 class="font-bold text-lg text-brand-slate" id="breath-phase-text">Inhale...</h4>
+                <p class="text-xs text-brand-slate/60 mt-1" id="breath-desc-text">Alternate nostril breathing. Calms focus channels.</p>
+              </div>
+              <button onclick="stopBreathing()" class="px-5 py-2 border border-brand-amber text-brand-amber font-bold rounded-lg hover:bg-brand-amber/10 text-xs transition-colors">
+                Exit Session
+              </button>
+            </div>
+
+            <!-- Selection Grid -->
+            <div id="pranayama-select-box" class="grid gap-4">
+              <button onclick="startBreathing('anulom')" class="p-4 bg-brand-cream border border-brand-sage/15 rounded-xl text-left hover:border-brand-sage/40 transition-colors flex justify-between items-center">
+                <div>
+                  <h4 class="font-bold text-sm text-brand-slate" data-t="anulomVilom">Anulom Vilom (Alternate Nostril)</h4>
+                  <p class="text-xs text-brand-sage mt-0.5">Alternate nostril breathing. Calms focus channels.</p>
+                </div>
+                <i data-lucide="play" class="w-4 h-4 text-brand-sage"></i>
+              </button>
+
+              <button onclick="startBreathing('bhramari')" class="p-4 bg-brand-cream border border-brand-lavender/15 rounded-xl text-left hover:border-brand-lavender/40 transition-colors flex justify-between items-center">
+                <div>
+                  <h4 class="font-bold text-sm text-brand-slate" data-t="bhramari">Bhramari (Bee Breathing)</h4>
+                  <p class="text-xs text-brand-lavender mt-0.5">Humming bee resonance. Instantly reduces examination anxiety.</p>
+                </div>
+                <i data-lucide="play" class="w-4 h-4 text-brand-lavender"></i>
+              </button>
+            </div>
+          </div>
+
+          <!-- Pomodoro focus timer -->
+          <div class="p-6 bg-brand-lavender-light/35 border border-brand-lavender/25 rounded-2xl space-y-6">
+            <h3 class="font-bold text-lg text-brand-lavender flex items-center gap-2">
+              <i data-lucide="moon" class="w-5 h-5"></i>
+              <span data-t="pomodoroTitle">Pomodoro Focus Timer</span>
+            </h3>
+
+            <div class="flex flex-col items-center justify-center text-center space-y-4">
+              <span id="pomo-clock" class="text-4xl font-bold font-mono tracking-wider text-brand-slate">25:00</span>
+              <span id="pomo-status" class="text-xs font-bold uppercase tracking-wider text-brand-lavender">Current: Deep Study</span>
+
+              <div class="flex gap-3">
+                <button onclick="togglePomo()" id="pomo-play-btn" class="p-2.5 bg-brand-lavender text-brand-cream rounded-xl hover:opacity-90 transition-opacity" aria-label="Play timer">
+                  <i data-lucide="play" class="w-4 h-4"></i>
+                </button>
+                <button onclick="resetPomo()" class="p-2.5 border border-brand-lavender text-brand-lavender rounded-xl hover:bg-brand-lavender/10" aria-label="Reset timer">
+                  <i data-lucide="rotate-ccw" class="w-4 h-4"></i>
+                </button>
+              </div>
+            </div>
+
+            <div class="p-4 bg-white rounded-xl border border-brand-lavender/20">
+              <h4 class="text-xs font-bold text-brand-lavender uppercase tracking-wider" data-t="digitalDetox">Digital Detox Suggestions</h4>
+              <p class="text-xs text-brand-slate/85 mt-1.5 leading-relaxed font-sans">
+                "Look away from your screen. Focus on an object 20 feet away for 20 seconds. This prevents eye strain and reduces sensory stimulation."
+              </p>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- 4. EXAM PATH -->
+      <section id="page-exam" class="page-view hidden max-w-4xl mx-auto space-y-8 animate-in fade-in duration-200">
+        <div class="flex justify-between items-start flex-wrap gap-4">
+          <div>
+            <h2 class="text-3xl font-bold font-sans text-brand-slate" data-t="examPathTitle">Exam Path Explorer</h2>
+            <p class="text-sm text-brand-slate/70 mt-1">Track syllabus coverage, log your mock scores, and analyze performance trends.</p>
+          </div>
+          <span class="px-4 py-1.5 bg-brand-sage text-brand-cream font-bold rounded-full text-sm animate-pulse" id="exam-badge-label">
+            Target: JEE
+          </span>
+        </div>
+
+        <!-- Exam intel & schedule dates (More details added) -->
+        <div class="p-6 bg-white border border-brand-sage/15 rounded-2xl shadow-sm grid gap-6 md:grid-cols-3">
+          <div class="space-y-4">
+            <h3 class="font-bold text-base text-brand-slate flex items-center gap-2 border-b border-brand-sage/10 pb-2">
+              <i data-lucide="compass" class="w-5 h-5 text-brand-sage"></i>
+              <span>Exam Architecture</span>
+            </h3>
+            <div class="space-y-2 text-xs font-sans">
+              <p><strong class="text-brand-slate">Format:</strong> <span id="exam-pattern-text">Loading...</span></p>
+              <p><strong class="text-brand-slate">Marking Scheme:</strong> <span id="exam-marking-text">Loading...</span></p>
+              <p class="text-brand-amber font-bold">⚡ PYQ Trends: <span id="exam-pyq-text">Loading...</span></p>
+            </div>
+          </div>
+
+          <!-- Schedule Dates Timeline -->
+          <div class="space-y-4">
+            <h3 class="font-bold text-base text-brand-slate flex items-center gap-2 border-b border-brand-sage/10 pb-2">
+              <i data-lucide="calendar" class="w-5 h-5 text-brand-sage"></i>
+              <span>Target Schedule Dates</span>
+            </h3>
+            <div class="space-y-2 text-xs font-sans text-brand-slate/85" id="exam-dates-box">
+              <!-- Rendered dynamically -->
+            </div>
+          </div>
+
+          <div class="space-y-4">
+            <h3 class="font-bold text-base text-brand-slate flex items-center gap-2 border-b border-brand-sage/10 pb-2">
+              <i data-lucide="book-open" class="w-5 h-5 text-brand-sage"></i>
+              <span>Recommended Core Resources</span>
+            </h3>
+            <ul id="exam-resources-list" class="list-disc pl-5 text-xs font-sans space-y-1.5 text-brand-slate/85">
+              <!-- Rendered dynamically -->
+            </ul>
+          </div>
+        </div>
+
+        <!-- Mock Test Score Logger (Feature Added) -->
+        <div class="grid gap-6 md:grid-cols-3">
+          <div class="bg-white p-6 border border-brand-sage/15 rounded-2xl shadow-sm space-y-4 flex flex-col justify-between">
+            <div>
+              <h3 class="font-bold text-base text-brand-slate flex items-center gap-2 border-b border-brand-sage/10 pb-2">
+                <i data-lucide="plus" class="w-5 h-5 text-brand-sage"></i>
+                <span>Log Mock Test Score</span>
+              </h3>
+              <div class="space-y-3 mt-4">
+                <div class="space-y-1">
+                  <label for="mock-subject" class="text-xs font-bold text-brand-slate/70">Subject / Test Name</label>
+                  <input id="mock-subject" type="text" placeholder="Physics Mechanics Part A" class="w-full px-3 py-2 bg-brand-cream border border-brand-sage/20 rounded-xl focus:outline-none focus:border-brand-sage text-sm text-brand-slate font-sans">
+                </div>
+                <div class="grid grid-cols-2 gap-3">
+                  <div class="space-y-1">
+                    <label for="mock-score" class="text-xs font-bold text-brand-slate/70 font-sans">Obtained Score</label>
+                    <input id="mock-score" type="number" placeholder="180" class="w-full px-3 py-2 bg-brand-cream border border-brand-sage/20 rounded-xl focus:outline-none focus:border-brand-sage text-sm text-brand-slate font-sans">
+                  </div>
+                  <div class="space-y-1">
+                    <label for="mock-max" class="text-xs font-bold text-brand-slate/70 font-sans">Max Score</label>
+                    <input id="mock-max" type="number" placeholder="300" class="w-full px-3 py-2 bg-brand-cream border border-brand-sage/20 rounded-xl focus:outline-none focus:border-brand-sage text-sm text-brand-slate font-sans">
+                  </div>
+                </div>
+              </div>
+            </div>
+            <button onclick="saveMockTestScore()" class="w-full py-2 bg-brand-sage text-brand-cream font-bold rounded-xl hover:opacity-90 transition-opacity text-sm font-sans mt-4">
+              Log Score Card
+            </button>
+          </div>
+
+          <!-- Mock score chart visualization -->
+          <div class="md:col-span-2 bg-white p-6 border border-brand-sage/15 rounded-2xl shadow-sm space-y-4">
+            <h3 class="font-bold text-base text-brand-slate flex items-center gap-2 border-b border-brand-sage/10 pb-2">
+              <i data-lucide="bar-chart" class="w-5 h-5 text-brand-sage"></i>
+              <span>Mock Exam Performance Trends</span>
+            </h3>
+            <div class="h-48 relative">
+              <canvas id="mockTestChart"></canvas>
+            </div>
+          </div>
+        </div>
+
+        <!-- SyllabusPrioritizer -->
+        <div class="p-6 bg-brand-sage-light/35 border border-brand-sage/20 rounded-2xl space-y-4">
+          <h3 class="font-bold text-lg text-brand-sage" data-t="syllabusNavigator">Syllabus Prioritization (JEE/NEET/UPSC)</h3>
+          <div class="grid gap-3" id="syllabus-tracker-list">
+            <!-- Rendered dynamically -->
+          </div>
+        </div>
+
+        <!-- Study sessions logs & analytics -->
+        <div class="grid gap-6 md:grid-cols-3">
+          <!-- Log study form -->
+          <div class="bg-white p-6 border border-brand-sage/15 rounded-2xl shadow-sm space-y-4 flex flex-col justify-between">
+            <div>
+              <h3 class="font-bold text-base text-brand-slate flex items-center gap-2 border-b border-brand-sage/10 pb-2">
+                <i data-lucide="plus" class="w-5 h-5 text-brand-sage"></i>
+                <span>Log Study Session</span>
+              </h3>
+
+              <div class="space-y-4 mt-4">
+                <div class="space-y-1">
+                  <label for="log-subject" class="text-xs font-bold text-brand-slate/70">Subject / Topic</label>
+                  <input id="log-subject" type="text" placeholder="Physics Mechanics" class="w-full px-3 py-2 bg-brand-cream border border-brand-sage/20 rounded-xl focus:outline-none focus:border-brand-sage text-sm text-brand-slate font-sans">
+                </div>
+
+                <div class="grid grid-cols-2 gap-3">
+                  <div class="space-y-1">
+                    <label for="log-duration" class="text-xs font-bold text-brand-slate/70 font-sans">Duration (Mins)</label>
+                    <input id="log-duration" type="number" value="45" min="5" max="480" class="w-full px-3 py-2 bg-brand-cream border border-brand-sage/20 rounded-xl focus:outline-none focus:border-brand-sage text-sm text-brand-slate font-sans">
+                  </div>
+                  <div class="space-y-1">
+                    <label for="log-hour" class="text-xs font-bold text-brand-slate/70 font-sans">Hour of Day</label>
+                    <input id="log-hour" type="number" value="10" min="0" max="23" class="w-full px-3 py-2 bg-brand-cream border border-brand-sage/20 rounded-xl focus:outline-none focus:border-brand-sage text-sm text-brand-slate font-sans">
+                  </div>
+                </div>
+
+                <div class="space-y-2">
+                  <div class="flex justify-between text-xs font-semibold text-brand-slate/85">
+                    <span>Focus Efficiency</span>
+                    <span id="log-eff-label">8/10</span>
+                  </div>
+                  <input id="log-efficiency" type="range" min="1" max="10" value="8" oninput="document.getElementById('log-eff-label').innerText = this.value + '/10'" class="w-full accent-brand-sage cursor-pointer">
+                </div>
+              </div>
+            </div>
+
+            <button onclick="saveStudySession()" class="w-full py-2 bg-brand-sage text-brand-cream font-bold rounded-xl hover:opacity-90 transition-opacity text-sm font-sans mt-4">
+              Log Session
+            </button>
+          </div>
+
+          <!-- Peak study time Chart -->
+          <div class="md:col-span-2 bg-white p-6 border border-brand-sage/15 rounded-2xl shadow-sm space-y-6">
+            <h3 class="font-bold text-base text-brand-slate flex items-center gap-2 border-b border-brand-sage/10 pb-2">
+              <i data-lucide="bar-chart-3" class="w-5 h-5 text-brand-sage"></i>
+              <span data-t="peakHoursTitle">Peak Performance Analytics</span>
+            </h3>
+            <div class="h-60 relative">
+              <canvas id="performanceChart"></canvas>
+            </div>
+            <div class="p-3 bg-brand-cream rounded-xl text-[11px] text-brand-slate/85 font-sans leading-relaxed">
+              💡 <strong>Peak Focus Insight:</strong> Based on study records, your efficiency remains highest around 9:00 AM - 11:00 AM. Consider studying high-weightage topics like Electrodynamics during this peak time window!
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- 5. BEYOND MARKS -->
+      <section id="page-beyond" class="page-view hidden max-w-4xl mx-auto space-y-8 animate-in fade-in duration-200">
+        <div>
+          <h2 class="text-3xl font-bold font-sans text-brand-slate" data-t="beyondMarksTitle">Beyond Marks & Resilience</h2>
+          <p class="text-sm text-brand-slate/70 mt-1">Ground yourself in your values. Your identity is vast, beautiful, and transcends any exam score card.</p>
+        </div>
+
+        <div class="grid gap-6 md:grid-cols-3">
+          <!-- Purpose engine -->
+          <div class="md:col-span-2 bg-white p-6 border border-brand-sage/15 rounded-2xl shadow-sm space-y-6">
+            <h3 class="font-bold text-lg text-brand-slate flex items-center gap-2 border-b border-brand-sage/10 pb-3">
+              <i data-lucide="heart" class="w-5 h-5 text-brand-sage"></i>
+              <span data-t="purposeTitle">Purpose Engine (My Why)</span>
+            </h3>
+
+            <div class="space-y-4">
+              <div class="space-y-2">
+                <label for="why-input" class="text-xs font-bold uppercase tracking-wider text-brand-slate/75">
+                  My Core Motivation ("Why I Started")
+                </label>
+                <textarea id="why-input" placeholder="Write down why you started this journey, your passions, and what matters to you beyond scores..." class="w-full h-24 p-3 bg-brand-cream border border-brand-sage/20 rounded-xl focus:outline-none focus:border-brand-sage text-brand-slate text-sm font-sans resize-none"></textarea>
+              </div>
+
+              <div class="space-y-2">
+                <label for="future-input" class="text-xs font-bold uppercase tracking-wider text-brand-slate/75">
+                  5-Year Future Character Vision
+                </label>
+                <textarea id="future-input" placeholder="Describe your life 5 years from now, focusing on your character, happiness, and relationships, regardless of exam results..." class="w-full h-24 p-3 bg-brand-cream border border-brand-sage/20 rounded-xl focus:outline-none focus:border-brand-sage text-brand-slate text-sm font-sans resize-none"></textarea>
+              </div>
+
+              <button onclick="savePurposeLogs()" class="px-6 py-2.5 bg-brand-sage text-brand-cream font-bold rounded-xl hover:opacity-90 transition-opacity text-sm font-sans">
+                Update Purpose Log
+              </button>
+            </div>
+          </div>
+
+          <!-- Growth Tree SVG -->
+          <div class="p-6 bg-brand-cream border border-brand-sage/20 rounded-2xl shadow-sm flex flex-col justify-between items-center space-y-6 text-center">
+            <div class="w-full border-b border-brand-sage/10 pb-3">
+              <span class="text-xs font-bold uppercase tracking-wider text-brand-slate/60" data-t="resilienceScore">Resilience Score</span>
+              <div class="text-4xl font-bold text-brand-sage mt-1 font-mono" id="beyond-resilience-val">65%</div>
+              <p class="text-[9px] text-brand-slate/60 mt-1 font-sans">Calculated based on habit logs and journal efforts.</p>
+            </div>
+
+            <!-- SVG Tree canvas -->
+            <div class="w-48 h-48 bg-white border border-brand-sage/15 rounded-full flex items-center justify-center p-3 relative shadow-inner">
+              <svg viewBox="0 0 200 200" class="w-full h-full" id="growth-tree-svg">
+                <!-- Tree Trunk -->
+                <path d="M 95,190 L 105,190 L 102,110 L 98,110 Z" class="fill-brand-gold stroke-brand-gold stroke-1" />
+                <!-- Branches -->
+                <path d="M 100,120 Q 80,100 70,85 M 100,130 Q 120,110 130,95 M 100,110 L 100,80" class="stroke-brand-gold stroke-2 fill-none" />
+                <!-- Leaves inserted dynamically -->
+              </svg>
+              <div class="absolute bottom-2 text-[9px] font-bold text-brand-sage uppercase tracking-widest bg-brand-cream px-2 py-0.5 rounded border border-brand-sage/10">
+                Resilience Growth
+              </div>
+            </div>
+
+            <p class="text-xs text-brand-slate/85 font-semibold" id="beyond-leaves-msg">
+              🌱 Your tree has grown 3 leaves! Keep logging to grow a dense, protective canopy.
+            </p>
+          </div>
+        </div>
+
+        <!-- Failure Recovery Paths -->
+        <div class="p-6 bg-brand-sage-light/35 border border-brand-sage/20 rounded-2xl space-y-6">
+          <h3 class="font-bold text-lg text-brand-sage flex items-center gap-2 border-b border-brand-sage/15 pb-2">
+            <i data-lucide="compass" class="w-5 h-5"></i>
+            <span>Parallel Career Pathways Explorer</span>
+          </h3>
+
+          <div class="grid gap-6 sm:grid-cols-2">
+            <div class="p-5 bg-white rounded-xl border border-brand-sage/15 shadow-sm space-y-3">
+              <div class="flex items-center gap-2 text-brand-sage">
+                <i data-lucide="award" class="w-5 h-5"></i>
+                <h4 class="font-bold text-sm">Path A: Clearing the Exam</h4>
+              </div>
+              <p class="text-xs font-bold text-brand-slate" id="clear-path-title">IIT/NIT Engineering Route</p>
+              <p class="text-xs text-brand-slate/85 leading-relaxed font-sans" id="clear-path-desc">B.Tech in computer science, electronics, or mechanical. Leads to core tech research, software architecture, or venture capital startups.</p>
+            </div>
+
+            <div class="p-5 bg-white rounded-xl border border-brand-lavender/15 shadow-sm space-y-3">
+              <div class="flex items-center gap-2 text-brand-lavender">
+                <i data-lucide="sparkles" class="w-5 h-5"></i>
+                <h4 class="font-bold text-sm">Path B: Parallel Technology Route</h4>
+              </div>
+              <p class="text-xs font-bold text-brand-slate" id="alt-path-title">Creative Technology & Applied Science Route</p>
+              <p class="text-xs text-brand-slate/85 leading-relaxed font-sans" id="alt-path-desc">BCA/MCA, BSc Data Science, or Interaction Design. Leads to open-source development, UI/UX engineering, data analytics, and digital product design.</p>
+            </div>
+          </div>
+
+          <div class="p-4 bg-brand-lavender-light/45 border border-brand-lavender/20 rounded-xl">
+            <p class="text-xs text-brand-slate/90 leading-relaxed font-sans">
+              💡 <strong>Counseling Perspective:</strong> Modern employers and researchers value coding skills, analytical problem solving, and persistence over exam ranks. A candidate from either path can reach senior leadership, publish research, or launch a tech startup. Your worth and options are not locked behind a single gate.
+            </p>
+          </div>
+        </div>
+      </section>
+
+      <!-- 6. FAMILY BRIDGE -->
+      <section id="page-family" class="page-view hidden max-w-4xl mx-auto space-y-8 animate-in fade-in duration-200">
+        <div>
+          <h2 class="text-3xl font-bold font-sans text-brand-slate" data-t="familyBridgeTitle">Family Bridge</h2>
+          <p class="text-sm text-brand-slate/70 mt-1">Bridge expectations. Communicate your preparation journey with your parents safely and constructively.</p>
+        </div>
+
+        <div class="grid gap-6 md:grid-cols-2">
+          <!-- Parent Summary Generator -->
+          <div class="p-6 bg-white border border-brand-sage/15 rounded-2xl shadow-sm space-y-6 flex flex-col justify-between">
+            <div class="space-y-4">
+              <h3 class="font-bold text-lg text-brand-slate flex items-center gap-2 border-b border-brand-sage/10 pb-3">
+                <i data-lucide="users" class="w-5 h-5 text-brand-sage"></i>
+                <span data-t="parentSummaryTitle">Parent Connect Summary</span>
+              </h3>
+              <p class="text-xs text-brand-slate/80 leading-relaxed font-sans" data-t="parentSummaryText">
+                Generate an AI summary of your emotional well-being that you can share with your parents. It translates raw feelings into communication-friendly summaries, keeping your journal text 100% private.
+              </p>
+
+              <div class="p-4 bg-brand-cream border border-brand-sage/15 rounded-xl text-xs flex gap-2">
+                <i data-lucide="shield-check" class="w-5 h-5 text-brand-sage shrink-0"></i>
+                <p class="text-brand-slate/85 font-sans leading-relaxed">
+                  <strong>Privacy Guardrail:</strong> Your raw journal entries are never exported. The summary translation uses general emotional trends and focuses on parenting recommendations.
+                </p>
+              </div>
+
+              <!-- Output Textbox -->
+              <div id="parent-summary-output-box" class="hidden p-4 bg-brand-sage-light/30 border border-brand-sage/20 rounded-xl space-y-3">
+                <p id="parent-summary-text" class="text-xs text-brand-slate whitespace-pre-line font-sans leading-relaxed select-all">
+                  Generated summary details...
+                </p>
+                <button onclick="copyParentSummary()" id="copy-summary-btn" class="px-3 py-1.5 bg-brand-sage text-brand-cream text-[10px] font-bold rounded hover:opacity-90 transition-opacity">
+                  Copy Summary Text
+                </button>
+              </div>
+            </div>
+
+            <button onclick="buildParentSummary()" id="summary-gen-btn" class="w-full py-2.5 bg-brand-sage text-brand-cream font-bold rounded-xl hover:opacity-90 transition-opacity text-sm font-sans flex items-center justify-center gap-2 mt-4">
+              <i data-lucide="send" class="w-4 h-4"></i>
+              <span data-t="generateSummary">Generate Parent Summary</span>
+            </button>
+          </div>
+
+          <!-- Discussion scripts -->
+          <div class="p-6 bg-brand-sage-light/35 border border-brand-sage/20 rounded-2xl space-y-6">
+            <div>
+              <h3 class="font-bold text-lg text-brand-sage flex items-center gap-2 border-b border-brand-sage/15 pb-2">
+                <i data-lucide="heart-handshake" class="w-5 h-5"></i>
+                <span data-t="discussionAssistant">Family Discussion Helper</span>
+              </h3>
+              <p class="text-xs text-brand-slate/70 mt-1">Select a conversation scenario to see constructive scripts.</p>
+            </div>
+
+            <div class="flex gap-2 flex-wrap">
+              <button onclick="loadDiscussionScript('burnout')" id="scr-btn-burnout" class="scr-btn px-3 py-1.5 rounded-lg text-xs font-semibold border bg-white border-brand-sage/10 hover:border-brand-sage/40 transition-colors">
+                Exhaustion/Rest
+              </button>
+              <button onclick="loadDiscussionScript('scores')" id="scr-btn-scores" class="scr-btn px-3 py-1.5 rounded-lg text-xs font-semibold border bg-white border-brand-sage/10 hover:border-brand-sage/40 transition-colors">
+                Mock Scores Drop
+              </button>
+              <button onclick="loadDiscussionScript('alternatives')" id="scr-btn-alternatives" class="scr-btn px-3 py-1.5 rounded-lg text-xs font-semibold border bg-white border-brand-sage/10 hover:border-brand-sage/40 transition-colors">
+                Career Backups
+              </button>
+            </div>
+
+            <div id="script-content-box" class="hidden space-y-4 font-sans text-xs">
+              <div class="p-4 bg-white rounded-xl border border-brand-sage/15 space-y-1">
+                <span class="text-[9px] font-bold text-brand-sage uppercase tracking-wider">How to initiate the talk:</span>
+                <p id="script-initiator" class="text-brand-slate leading-relaxed">...</p>
+              </div>
+              <div class="p-4 bg-brand-amber-light/30 border border-brand-amber/20 rounded-xl space-y-1">
+                <span class="text-[9px] font-bold text-brand-amber uppercase tracking-wider">Anticipated parent concern:</span>
+                <p id="script-concern" class="text-brand-slate leading-relaxed">...</p>
+              </div>
+              <div class="p-4 bg-white rounded-xl border border-brand-sage/15 space-y-1">
+                <span class="text-[9px] font-bold text-brand-sage uppercase tracking-wider">How to steer it constructively:</span>
+                <p id="script-steering" class="text-brand-slate leading-relaxed">...</p>
+              </div>
+              <div class="p-3 bg-brand-lavender-light/45 border border-brand-lavender/20 rounded-xl flex gap-2">
+                <i data-lucide="help-circle" class="w-5 h-5 text-brand-lavender shrink-0"></i>
+                <p id="script-tip" class="text-brand-slate/90 leading-relaxed font-semibold">...</p>
+              </div>
+            </div>
+
+            <div id="script-placeholder" class="text-center py-8 text-brand-slate/50 text-xs">
+              Select one of the topics above to view conversation guidelines.
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- 7. SETTINGS PAGE -->
+      <section id="page-settings" class="page-view hidden max-w-4xl mx-auto space-y-8 animate-in fade-in duration-200">
+        <div>
+          <h2 class="text-3xl font-bold font-sans text-brand-slate" data-t="settingsTitle">App Settings & Accessibility</h2>
+          <p class="text-sm text-brand-slate/70 mt-1">Personalize your experience and configure accessibility options.</p>
+        </div>
+
+        <!-- Security box -->
+        <div class="p-6 bg-brand-sage-light/35 border border-brand-sage/20 rounded-2xl flex flex-col md:flex-row gap-5 items-start">
+          <div class="p-3 bg-brand-sage text-brand-cream rounded-xl">
+            <i data-lucide="shield" class="w-6 h-6"></i>
+          </div>
+          <div class="space-y-2">
+            <div class="flex items-center gap-2 flex-wrap">
+              <h3 class="font-bold text-lg text-brand-slate" data-t="noLoginTitle">Why is there no login screen?</h3>
+            </div>
+            <p class="text-sm text-brand-slate/90 leading-relaxed font-sans" data-t="noLoginDesc">
+              Antardrishti Mind operates 100% locally. Your data is stored in your browser's IndexedDB. We do not transmit or store your PII on servers. This is an intentional security design. Note: Data does not sync across devices.
+            </p>
+            <div class="pt-2">
+              <span class="text-[11px] font-mono bg-white/70 px-3 py-1.5 rounded-lg border border-brand-sage/10 select-all" id="settings-profile-uuid">
+                Profile ID: Loading...
+              </span>
+            </div>
+            <p class="text-xs text-brand-lavender font-semibold pt-1">
+              ⚠️ Phase 2 Roadmap Note: Data resides exclusively in this browser and does not sync across multiple devices.
+            </p>
+          </div>
+        </div>
+
+        <!-- Edit profile card -->
+        <div class="p-6 bg-white border border-brand-sage/15 rounded-2xl shadow-sm">
+          <form onsubmit="saveProfileChanges(event)" class="space-y-6">
+            <h3 class="font-bold text-lg text-brand-slate flex items-center gap-2 border-b border-brand-sage/10 pb-3">
+              <i data-lucide="user" class="w-5 h-5 text-brand-sage"></i>
+              <span>Anonymous Profile Setup</span>
+            </h3>
+
+            <div class="grid gap-6 sm:grid-cols-2">
+              <div class="space-y-2">
+                <label for="settings-nickname" class="text-xs font-bold uppercase tracking-wider text-brand-slate/75">First Name / Nickname</label>
+                <input id="settings-nickname" type="text" class="w-full px-4 py-2.5 bg-brand-cream border border-brand-sage/20 rounded-xl focus:outline-none focus:border-brand-sage text-brand-slate text-sm font-sans" required>
+              </div>
+
+              <div class="space-y-2">
+                <label for="settings-exam" class="text-xs font-bold uppercase tracking-wider text-brand-slate/75">Target Exam</label>
+                <select id="settings-exam" class="w-full px-4 py-2.5 bg-brand-cream border border-brand-sage/20 rounded-xl focus:outline-none focus:border-brand-sage text-brand-slate text-sm font-sans font-semibold">
+                  <option value="JEE">JEE</option>
+                  <option value="NEET">NEET</option>
+                  <option value="UPSC">UPSC</option>
+                  <option value="GATE">GATE</option>
+                  <option value="CAT">CAT</option>
+                </select>
+              </div>
+            </div>
+
+            <!-- Avatar -->
+            <div class="space-y-3">
+              <span class="text-xs font-bold uppercase tracking-wider text-brand-slate/75">Choose Avatar Icon</span>
+              <div class="flex gap-3 flex-wrap" id="avatar-select-list">
+                <!-- Loaded dynamically -->
+              </div>
+            </div>
+
+            <!-- Real API key configuration -->
+            <div class="space-y-2 pt-2 border-t border-brand-sage/10">
+              <label for="settings-api-key" class="text-xs font-bold uppercase tracking-wider text-brand-slate/75 block">
+                Optional: Google Gemini API Key (Allows Real AI Responses instead of Local Mocks)
+              </label>
+              <input id="settings-api-key" type="password" placeholder="AIZA..." class="w-full px-4 py-2.5 bg-brand-cream border border-brand-sage/20 rounded-xl focus:outline-none focus:border-brand-sage text-brand-slate text-sm font-mono">
+            </div>
+
+            <div class="flex items-center gap-4 pt-2">
+              <button type="submit" class="px-6 py-2.5 bg-brand-sage text-brand-cream font-bold rounded-xl hover:opacity-90 transition-opacity text-sm font-sans">
+                Save Profile Changes
+              </button>
+              <span id="settings-save-success" class="hidden text-sm text-brand-sage font-semibold animate-pulse">✓ Saved to Local Storage</span>
+            </div>
+          </form>
+        </div>
+
+        <!-- Accessibility / Language Toggles -->
+        <div class="grid gap-6 md:grid-cols-2">
+          <!-- Visual options -->
+          <div class="p-6 bg-white border border-brand-sage/15 rounded-2xl shadow-sm space-y-6">
+            <h3 class="font-bold text-lg text-brand-slate border-b border-brand-sage/10 pb-3">Accessibility Options</h3>
+
+            <!-- Calm mode -->
+            <div class="flex items-start justify-between gap-4">
+              <div class="space-y-1">
+                <span class="font-bold text-sm text-brand-slate" data-t="calmModeTitle">Calm Mode</span>
+                <p class="text-xs text-brand-slate/60" data-t="calmModeDesc">Reduces visual noise, colors, animations, and information density during high-stress periods.</p>
+              </div>
+              <button onclick="toggleCalmMode()" id="calm-toggle-btn" class="w-12 h-6 flex items-center bg-brand-slate/20 rounded-full p-1 transition-colors">
+                <div id="calm-toggle-thumb" class="bg-white w-4 h-4 rounded-full shadow-md transform transition-transform translate-x-0"></div>
+              </button>
+            </div>
+
+            <!-- Dyslexia font -->
+            <div class="flex items-start justify-between gap-4">
+              <div class="space-y-1">
+                <span class="font-bold text-sm text-brand-slate" data-t="dyslexiaModeTitle">Dyslexia Friendly Font</span>
+                <p class="text-xs text-brand-slate/60" data-t="dyslexiaModeDesc">Changes the font family to an accessible, readable style for dyslexic students.</p>
+              </div>
+              <button onclick="toggleDyslexiaMode()" id="dyslexia-toggle-btn" class="w-12 h-6 flex items-center bg-brand-slate/20 rounded-full p-1 transition-colors">
+                <div id="dyslexia-toggle-thumb" class="bg-white w-4 h-4 rounded-full shadow-md transform transition-transform translate-x-0"></div>
+              </button>
+            </div>
+          </div>
+
+          <!-- Languages -->
+          <div class="p-6 bg-white border border-brand-sage/15 rounded-2xl shadow-sm space-y-6">
+            <h3 class="font-bold text-lg text-brand-slate border-b border-brand-sage/10 pb-3" data-t="languageSelect">
+              Language / भाषा / மொழி
+            </h3>
+            <div class="flex flex-col gap-3">
+              <button onclick="changeAppLang('en')" id="lang-btn-en" class="flex items-center justify-between px-4 py-3 rounded-xl border text-sm font-semibold transition-all bg-brand-sage/10 border-brand-sage text-brand-sage">
+                <span>English (US/India)</span>
+                <span id="lang-chk-en">✓</span>
+              </button>
+              <button onclick="changeAppLang('hi')" id="lang-btn-hi" class="flex items-center justify-between px-4 py-3 rounded-xl border text-sm font-semibold transition-all bg-brand-cream border-brand-sage/10 hover:bg-brand-sage-light/35">
+                <span>हिन्दी (Hindi)</span>
+                <span id="lang-chk-hi" class="hidden">✓</span>
+              </button>
+              <button onclick="changeAppLang('ta')" id="lang-btn-ta" class="flex items-center justify-between px-4 py-3 rounded-xl border text-sm font-semibold transition-all bg-brand-cream border-brand-sage/10 hover:bg-brand-sage-light/35">
+                <span>தமிழ் (Tamil)</span>
+                <span id="lang-chk-ta" class="hidden">✓</span>
+              </button>
+            </div>
+          </div>
+        </div>
+
+        <!-- Danger zone -->
+        <div class="p-6 bg-brand-amber-light/30 border border-brand-amber/20 rounded-2xl flex flex-col md:flex-row items-center justify-between gap-4">
+          <div>
+            <h3 class="font-bold text-sm text-brand-slate">Reset Application Cache</h3>
+            <p class="text-xs text-brand-slate/60 mt-0.5">This permanently deletes all your journal entries, focus records, and customization logs from your browser.</p>
+          </div>
+          <button onclick="wipeDatabase()" class="flex items-center gap-2 px-5 py-2 border border-brand-amber text-brand-amber font-bold rounded-xl hover:bg-brand-amber/10 text-xs transition-colors">
+            <i data-lucide="refresh-cw" class="w-4 h-4"></i>
+            <span data-t="resetData">Clear All Local Data</span>
+          </button>
+        </div>
+      </section>
+
+    </main>
+
+    <!-- FLOATING ACTION HELPERS -->
+    <div class="fixed bottom-20 md:bottom-6 right-6 flex flex-col md:flex-row gap-3 z-30" aria-label="Crisis and Academic Support Helpers">
+      <!-- Doubt Buddy -->
+      <button onclick="openDoubtBuddyPanel()" class="flex items-center gap-2 px-4 py-3 bg-brand-sage hover:bg-brand-sage/90 text-brand-cream font-sans text-sm font-bold rounded-full shadow-lg transition-transform hover:-translate-y-0.5 animate-bounce">
+        <i data-lucide="compass" class="w-4 h-4"></i>
+        <span data-t="doubtBuddyButton">Doubt Buddy</span>
+      </button>
+
+      <!-- SOS Helper -->
+      <button onclick="openSOSModal()" class="flex items-center gap-2 px-4 py-3 bg-brand-amber hover:bg-brand-amber/90 text-brand-cream font-sans text-sm font-bold rounded-full shadow-lg transition-transform hover:-translate-y-0.5">
+        <i data-lucide="shield-alert" class="w-4 h-4"></i>
+        <span data-t="sosButton">SOS Help</span>
+      </button>
+    </div>
+
+    <!-- SOS MODAL -->
+    <div id="sos-modal" class="hidden fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/60 backdrop-blur-sm" role="dialog" aria-modal="true" aria-labelledby="sos-modal-title">
+      <div class="w-full max-w-lg bg-brand-cream border border-brand-amber/30 rounded-2xl shadow-xl overflow-hidden animate-in fade-in zoom-in-95 duration-200">
+        
+        <div class="flex items-center justify-between p-5 border-b border-brand-amber/20 bg-brand-amber-light/30">
+          <div class="flex items-center gap-3 text-brand-amber">
+            <i data-lucide="shield-alert" class="w-6 h-6 animate-pulse"></i>
+            <h2 id="sos-modal-title" class="text-xl font-bold font-sans" data-t="sosTitle">Emotional & Crisis Support</h2>
+          </div>
+          <button onclick="closeSOSModal()" class="p-1 rounded-full hover:bg-black/10 text-brand-slate" aria-label="Close modal">
+            <i data-lucide="x" class="w-5 h-5"></i>
+          </button>
+        </div>
+
+        <div class="p-6 space-y-6">
+          <p class="text-base text-brand-slate/90 font-medium leading-relaxed" data-t="sosHelplineIntro">
+            If you feel overwhelmed, anxious, or have thoughts of self-harm, please reach out immediately. You are not alone, and your worth is not defined by any exam.
+          </p>
+
+          <div class="grid gap-4 sm:grid-cols-2">
+            <div class="p-4 bg-brand-cream border border-brand-sage/20 rounded-xl flex flex-col justify-between space-y-3 shadow-sm">
+              <div>
+                <h3 class="font-bold text-brand-slate text-sm">Tele MANAS</h3>
+                <p class="text-xs text-brand-sage mt-1">Govt. of India 24/7 Mental Health Helpline</p>
+              </div>
+              <a href="tel:14416" class="inline-flex items-center justify-center gap-2 w-full py-2 bg-brand-sage text-brand-cream font-bold rounded-lg hover:opacity-90 transition-opacity">
+                <i data-lucide="phone" class="w-4 h-4"></i>
+                <span>Call 14416</span>
+              </a>
+            </div>
+
+            <div class="p-4 bg-brand-cream border border-brand-lavender/20 rounded-xl flex flex-col justify-between space-y-3 shadow-sm">
+              <div>
+                <h3 class="font-bold text-brand-slate text-sm">KIRAN Helpline</h3>
+                <p class="text-xs text-brand-lavender mt-1">Govt. of India 24/7 Support Helpline</p>
+              </div>
+              <a href="tel:18005990019" class="inline-flex items-center justify-center gap-2 w-full py-2 bg-brand-lavender text-brand-cream font-bold rounded-lg hover:opacity-90 transition-opacity">
+                <i data-lucide="phone" class="w-4 h-4"></i>
+                <span>Call 1800-599-0019</span>
+              </a>
+            </div>
+          </div>
+
+          <div class="p-4 bg-brand-sage-light/40 border border-brand-sage/20 rounded-xl">
+            <p class="text-[10px] text-brand-slate/85 leading-relaxed font-sans" data-t="sosDisclaimer">
+              Disclaimer: This app is a wellness companion and not a replacement for professional clinical care. We do not claim absolute confidentiality guarantees (data stays locally on your device, but web connections to APIs are encrypted).
+            </p>
+          </div>
+        </div>
+
+        <div class="flex justify-end p-4 border-t border-brand-amber/20 bg-brand-cream">
+          <button onclick="closeSOSModal()" class="px-5 py-2 border border-brand-slate text-brand-slate hover:bg-brand-slate/10 font-bold rounded-lg transition-colors text-sm" data-t="close">
+            Close
+          </button>
+        </div>
+      </div>
+    </div>
+
+    <!-- DOUBT BUDDY PANEL -->
+    <div id="doubt-buddy-panel" class="hidden fixed inset-y-0 right-0 z-40 w-full sm:w-[480px] bg-brand-cream border-l border-brand-sage/20 shadow-2xl flex flex-col animate-in slide-in-from-right duration-250" role="dialog" aria-modal="true" aria-labelledby="doubt-buddy-title">
+      <div class="p-4 border-b border-brand-sage/10 bg-brand-sage-light/30 flex items-center justify-between">
+        <div class="flex items-center gap-2 text-brand-sage">
+          <i data-lucide="compass" class="w-6 h-6"></i>
+          <h2 id="doubt-buddy-title" class="font-bold text-lg font-sans" data-t="doubtBuddyTitle">Doubt Buddy — Academic AI</h2>
+        </div>
+        <div class="flex items-center gap-2">
+          <button onclick="clearChatHistory()" class="text-xs text-brand-lavender hover:underline mr-2">Clear Conversation</button>
+          <button onclick="closeDoubtBuddyPanel()" class="p-1 rounded-full hover:bg-black/10 text-brand-slate" aria-label="Close chat panel">
+            <i data-lucide="x" class="w-5 h-5"></i>
+          </button>
+        </div>
+      </div>
+
+      <!-- Messages body -->
+      <div class="flex-1 overflow-y-auto p-4 space-y-4" id="chat-messages-container">
+        <div class="p-3 bg-brand-lavender-light/40 border border-brand-lavender/20 rounded-xl flex gap-2">
+          <i data-lucide="help-circle" class="w-5 h-5 text-brand-lavender shrink-0 mt-0.5"></i>
+          <p class="text-xs text-brand-slate/90 leading-relaxed font-sans" data-t="doubtBuddyDisclaimer">
+            Socratic Academic Assistant. I explain concepts to help you understand rather than giving direct answers. I may make mistakes; consult your teachers.
+          </p>
+        </div>
+
+        <div id="chat-empty-state" class="flex flex-col items-center justify-center py-12 text-center text-brand-slate/60 space-y-3">
+          <span class="text-4xl">💡</span>
+          <p class="font-sans text-sm font-semibold">How can I help you understand today?</p>
+          <p class="text-xs max-w-xs">Ask physics formulas, chemistry reaction dynamics, or UPSC/NEET study strategies.</p>
+        </div>
+
+        <div id="chat-list" class="space-y-4">
+          <!-- Rendered dynamically -->
+        </div>
+      </div>
+
+      <!-- Input footer -->
+      <div class="p-4 border-t border-brand-sage/10 bg-brand-cream">
+        <form onsubmit="submitChatMessage(event)" class="flex gap-2 items-center">
+          <input id="chat-input-text" type="text" placeholder="Ask a subject doubt or strategy question..." class="flex-1 px-4 py-3 rounded-xl border border-brand-sage/20 bg-white text-brand-slate text-sm focus:outline-none focus:border-brand-sage" aria-label="Academic Doubt Input">
+
+          <button type="button" onclick="toggleChatVoice()" id="chat-voice-btn" class="p-3 border border-brand-sage/20 text-brand-sage hover:bg-brand-sage/10 rounded-xl" aria-label="Start Voice Input">
+            <i data-lucide="mic" class="w-4 h-4"></i>
+          </button>
+
+          <button type="submit" class="p-3 bg-brand-sage text-brand-cream rounded-xl hover:opacity-90 transition-opacity" aria-label="Send Query">
+            <i data-lucide="send" class="w-4 h-4"></i>
+          </button>
+        </form>
+
+        <div class="mt-2 text-right">
+          <span class="text-[10px] text-brand-slate/60">
+            Session Usage: <span id="chat-limit-counter">0</span> / 15 queries
+          </span>
+        </div>
+      </div>
+    </div>
+
+  </div>
+
+  <!-- Decoupled Modular Scripts -->
+  <script src="js/db.js"></script>
+  <script src="js/translations.js"></script>
+  <script src="js/ai.js"></script>
+  <script src="js/app.js"></script>
+</body>
+</html>
